@@ -11,8 +11,12 @@ class Database:
         self.cursor.execute(f"CREATE TABLE IF NOT EXISTS {table_name} ({vals})")
         self.con.commit()
 
-    def add_item(self, *values):
-        pass
+    def add_item(self, table_name, *values):
+        vals = ', '.join(values)
+        for val in values:
+            placeholders += ", ".join('?')
+        query = f"INSERT INTO {table_name}, ({vals}) VALUES ({placeholders})"
+        
 
     def fetch_all(self, table_name):
 
